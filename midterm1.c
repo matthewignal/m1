@@ -36,7 +36,7 @@ int main (void)
     while (abserr2 > tol);
     kbbp = k / 2;
 
-    double time, time1, tmin = 1., tmax = 2.;
+    double time, time1, time2, tmin = 1., tmax = 2.;
     int count = 1000;
 
     do
@@ -50,7 +50,7 @@ int main (void)
         time = timer_stop ();
 
         time1 = time / count;
-        printf (" %10.2f usec %10.6f sec %10d\n", time1 * 1.e6, time, count);
+        printf ("Leibniz: %10.2f usec %10.6f sec %10d\n", time1 * 1.e6, time, count);
         /*
          * adjust count such that cpu time is between
          * tmin and tmax
@@ -58,6 +58,30 @@ int main (void)
         count = adjust_rep_count (count, time, tmin, tmax);
     }
     while ((time > tmax) || (time < tmin));
+
+    count = 1000;
+
+    do
+    {
+
+        timer_start ();
+        for (i = 0; i < count; i++)
+        {
+            pi = pi_bbp (kbbp);
+        }
+        time = timer_stop ();
+
+        time2 = time / count;
+        printf ("BBP: %10.2f usec %10.6f sec %10d\n", time1 * 1.e6, time, count);
+        /*
+         * adjust count such that cpu time is between
+         * tmin and tmax
+         */
+        count = adjust_rep_count (count, time, tmin, tmax);
+    }
+    while ((time > tmax) || (time < tmin));
+
+    printf ("Speedup: %.2f\n", time1 / time2);
 
     return 0;
 }
