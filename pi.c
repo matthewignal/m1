@@ -1,6 +1,8 @@
 double pi_leibniz (int n);
 double pi_bbp (int n);
 
+// calculates pi using Leibniz series
+
 double pi_leibniz (int n)
 {
     int i;
@@ -14,6 +16,8 @@ double pi_leibniz (int n)
     }
     return 4 * p;
 }
+
+// calculates pi using Bailey-Borwein-Plouffe series
 
 double pi_bbp (int n)
 {

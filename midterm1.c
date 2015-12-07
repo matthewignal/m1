@@ -13,6 +13,8 @@ int main (void)
     int k, kbbp;
     double tol = 1.e-6, pi, abserr;
     double abserr2, pi2;
+    
+    // calculation of absolute error for pi using Leibniz series
 
     i = 1;
     do
@@ -26,6 +28,8 @@ int main (void)
     ileibniz = i / 2;
 
     k = 1;
+   
+    // calculation of absolute error for pi using BBP series
     do
     {
         pi2 = pi_bbp (k);
@@ -38,6 +42,8 @@ int main (void)
 
     double time, time1, time2, tmin = 1., tmax = 2.;
     int count = 1000;
+
+    // timer of Leibinz calculation
 
     do
     {
@@ -61,9 +67,10 @@ int main (void)
 
     count = 1000;
 
+    // timer of BBP calculation
+
     do
     {
-
         timer_start ();
         for (i = 0; i < count; i++)
         {
@@ -80,6 +87,8 @@ int main (void)
         count = adjust_rep_count (count, time, tmin, tmax);
     }
     while ((time > tmax) || (time < tmin));
+
+    // calculates ratio of Leibniz/BBP
 
     printf ("Speedup: %.2f\n", time1 / time2);
 
